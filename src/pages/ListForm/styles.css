@@ -1,0 +1,20 @@
+    .form-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 10 25px;
+    margin: 20px auto;
+    }
+    .form-container h1 {
+    margin-top: 20px;
+    margin-bottom: 24px;
+    padding-left: 20px;
+    color:blue;
+    }
+    
+    .form-container ul {
+    display: grid;
+    padding: 0 25px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 35px;
+    list-style: none;
+    } 
