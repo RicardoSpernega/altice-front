@@ -1,9 +1,9 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { parse, isDate } from "date-fns";
-
+// import {useNavigate} from 'react-router-dom';
 import FormLogo from "../../assets/form-altice.png";
 import api from '../../services/api';
 import "../../App.css";
@@ -15,6 +15,7 @@ let axiosConfig = {
       "Access-Control-Allow-Origin": "*",
   }
 };
+
 const today = new Date();
 const schema = yup
   .object({
@@ -46,25 +47,21 @@ const schema = yup
   
     return parsedDate;
   }
+
   function createPost(data) {
     api
       .post("/form/new-form",data, axiosConfig)
       .then((response) => {
-        console.log(response.data);
+        return true;
       })
       .catch((response) =>{
-        console.log(response);
+        return false;
       });
   }
+
 function Form() {
-  useEffect(() => {
-    api.get("/form")
-       .then((response) => {
-         console.log(response.data);
-      })
-      .catch((err) => {
-        console.error("ops! ocorreu um erro : " + err);
-  });},[]);
+  //Navigate -> encaminharia para outra pagina (não necessario para o projeto) -- reload page -- 
+  // const navigate = useNavigate();
 
   const {
     register,
@@ -75,8 +72,13 @@ function Form() {
   });
 
   function onSubmit(userData) {
-    console.log(userData);
-    createPost(userData);
+    if(!createPost(userData)){
+      alert('Dados enviados com sucesso!')
+      window.location.reload();
+    }else{
+      alert('Algo deu errado =(')
+    }
+      
   }
 
   return (

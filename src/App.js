@@ -8,6 +8,7 @@ export default function App() {
     <BrowserRouter>
     <Routes>
         <Route  path="/" element = { <Form/> }  exact />
+        <Route  path="/Form" element = { <Form/> }  exact />
         <Route   path="/list-form" element = { <ListForm/> } />
     </Routes>
     </BrowserRouter>
