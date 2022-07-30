@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import FormLogo from "./assets/form-logo.png";
-
+import FormLogo from "./assets/form-altice.png";
+import api from './services/api';
 import "./App.css";
+
 
 const schema = yup
   .object({
@@ -14,28 +15,33 @@ const schema = yup
       .string()
       .email("Digite um email válido")
       .required("O email é obrigatório"),
-    password: yup
+    nif: yup
       .string()
-      .min(6, "A senha deve ter pelo menos 6 digitos")
-      .required("A senha é obrigatória"),
-    confirmPassword: yup
+      .min(8, "O nif deve ter 8 caracteres")
+      .required("O nif é obrigatório"),
+    morada: yup
       .string()
-      .required("Confirmar a senha é obrigatório")
-      .oneOf([yup.ref("password")], "As senhas devem ser iguais"),
-  })
+      .required("Morada é obrigatório"),
+    })
   .required();
 
 function App() {
+  useEffect(() => {
+    api.get("/form")
+       .then((response) => {
+         console.log(response.data);
+      })
+      .catch((err) => {
+        console.error("ops! ocorreu um erro : " + err);
+    });},[]);
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  console.log(watch("name")); 
 
   function onSubmit(userData) {
     console.log(userData);
@@ -58,18 +64,18 @@ function App() {
       </label>
 
       <label>
-        Senha
-        <input type="password" {...register("password")} />
-        <span>{errors.password?.message}</span>
+        NIF
+        <input type="text" {...register("nif")} />
+        <span>{errors.nif?.message}</span>
       </label>
 
       <label>
-        Confirmar Senha
-        <input type="password" {...register("confirmPassword")} />
-        <span>{errors.confirmPassword?.message}</span>
+        Morada
+        <input type="text" {...register("morada")} />
+        <span>{errors.morada?.message}</span>
       </label>
 
-      <button type="submit">Cadastrar-se</button>
+      <button type="submit">Enviar</button>
     </form>
   );
 }
