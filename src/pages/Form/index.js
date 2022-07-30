@@ -11,7 +11,7 @@ import "../../App.css";
 
 let axiosConfig = {
   headers: {
-      'Content-Type': 'Formlication/json;charset=UTF-8',
+      'Content-Type': 'application/json; charset=utf-8',
       "Access-Control-Allow-Origin": "*",
   }
 };
