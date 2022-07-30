@@ -11,7 +11,10 @@
     padding-left: 20px;
     color:blue;
     }
-    
+    .form-container li{
+        border-style: solid;
+        padding: 10px;
+    }
     .form-container ul {
     display: grid;
     padding: 0 25px;
