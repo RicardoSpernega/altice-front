@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from '../../services/api';
-// import './styles.css';
+import './styles.css';
 
 export default function ListForm() {
   const [forms, setforms] = useState([]);
@@ -16,13 +16,15 @@ export default function ListForm() {
   }, []);
   return (
     <div className="form-container">
-       <h1>Relação de Formulario</h1>
+       <h1>Lista de Formularios</h1>
         <ul>
            {forms.map(form => (
              <li key={form.formId}>
                 <b>Nome:</b>{form.nome}<br/>
                 <b>Email:</b>{form.email}<br/>
                 <b>Nif:</b>{form.nif}<br/>
+                <b>Morada:</b>{form.morada}<br/>
+                <b>Data de nascimento:</b>{form.nascimento}<br/>
             </li>
          ))}
         </ul>
